@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bhai — Brotherhood for guys figuring it out</title>
+<meta name="description" content="Bhai is brotherhood for guys in their 20s — small circles, real mentors, one step at a time.">
+<style>
+  :root{
+    --navy:#0b1220; --navy2:#111c30; --card:#16233c; --line:#223252;
+    --amber:#f5a623; --amber-d:#d98f0e; --text:#eef2f7; --muted:#9fb0c7;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--navy);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px}
+  header{padding:22px 0 8px;display:flex;justify-content:space-between;align-items:center}
+  .logo{font-size:24px;font-weight:800;letter-spacing:.5px}
+  .logo span{color:var(--amber)}
+  .logo small{display:block;font-size:11px;font-weight:500;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+  .top-cta{font-size:14px;font-weight:700;color:var(--navy);background:var(--amber);border:none;border-radius:999px;padding:9px 16px;cursor:pointer;text-decoration:none}
+  section{padding:44px 0}
+  h1{font-size:38px;line-height:1.15;font-weight:800;letter-spacing:-.5px}
+  h1 em{font-style:normal;color:var(--amber)}
+  h2{font-size:24px;font-weight:800;letter-spacing:-.3px;margin-bottom:6px}
+  .sub{color:var(--muted);font-size:17px;margin:14px 0 24px;max-width:520px}
+  .btn{display:inline-block;background:var(--amber);color:var(--navy);font-weight:800;font-size:16px;border:none;border-radius:999px;padding:14px 26px;cursor:pointer;text-decoration:none}
+  .btn:hover{background:var(--amber-d)}
+  .btn.ghost{background:transparent;color:var(--text);border:1.5px solid var(--line)}
+  .btn.ghost:hover{border-color:var(--amber);color:var(--amber)}
+  .hint{color:var(--muted);font-size:14px;margin-top:12px}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-bottom:10px}
+  .section-sub{color:var(--muted);font-size:16px;margin-bottom:22px}
+  .pill-row{display:flex;flex-wrap:wrap;gap:10px}
+  .pill{background:var(--navy2);border:1.5px solid var(--line);color:var(--text);font-size:15px;font-weight:600;border-radius:999px;padding:12px 18px;cursor:pointer}
+  .pill:hover{border-color:var(--amber)}
+  .pill.active{background:var(--amber);border-color:var(--amber);color:var(--navy)}
+  .rec{display:none;margin-top:20px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--amber);border-radius:14px;padding:18px 20px}
+  .rec.show{display:block}
+  .rec strong{font-size:17px}
+  .rec p{color:var(--muted);margin-top:4px}
+  .rec .btn{margin-top:14px;padding:10px 20px;font-size:14px}
+  .grid{display:grid;gap:14px}
+  @media(min-width:600px){.grid.two{grid-template-columns:1fr 1fr}.grid.three{grid-template-columns:1fr 1fr 1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+  .card h3{font-size:19px;margin-bottom:4px}
+  .card .tag{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--amber)}
+  .card p{color:var(--muted);font-size:15px;margin-top:8px}
+  .card ul{list-style:none;margin-top:12px}
+  .card li{font-size:14px;color:var(--text);padding:5px 0 5px 22px;position:relative}
+  .card li::before{content:"";position:absolute;left:2px;top:13px;width:8px;height:8px;border-radius:50%;background:var(--amber)}
+  .card .for{margin-top:12px;font-size:14px;color:var(--muted)}
+  .card .for b{color:var(--text)}
+  .example{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:3px 9px}
+  .mission{display:flex;gap:14px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .mission .n{flex:0 0 30px;width:30px;height:30px;border-radius:50%;background:var(--amber);color:var(--navy);font-weight:800;display:flex;align-items:center;justify-content:center;font-size:15px}
+  .mission b{display:block;font-size:16px}
+  .mission span{color:var(--muted);font-size:14px}
+  .mission.done{opacity:.65}
+  .mission.done .n{background:var(--muted)}
+  .streak-box{margin-top:20px;background:var(--navy2);border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+  .streak-box .count{font-size:15px;color:var(--muted)}
+  .streak-box .count b{font-size:28px;color:var(--amber);display:block;line-height:1.1}
+  form{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+  label{display:block;font-size:14px;font-weight:700;margin:16px 0 6px}
+  label:first-child{margin-top:0}
+  input[type=text],input[type=number],select{width:100%;background:var(--navy2);border:1.5px solid var(--line);color:var(--text);border-radius:10px;padding:12px 14px;font-size:16px;font-family:inherit}
+  input:focus,select:focus{outline:none;border-color:var(--amber)}
+  .radio-row{display:flex;flex-wrap:wrap;gap:10px}
+  .radio-row label{margin:0;font-weight:600}
+  .radio-row input{accent-color:var(--amber);margin-right:6px}
+  .radio-row .opt{background:var(--navy2);border:1.5px solid var(--line);border-radius:999px;padding:10px 16px;cursor:pointer;display:flex;align-items:center}
+  .radio-row .opt:has(input:checked){border-color:var(--amber);background:#2a2113}
+  form .btn{margin-top:20px;width:100%}
+  .welcome{display:none;background:var(--card);border:1px solid var(--amber);border-radius:16px;padding:24px;text-align:center}
+  .welcome.show{display:block}
+  .welcome h3{font-size:22px;margin-bottom:8px}
+  .welcome p{color:var(--muted)}
+  .welcome .circle-name{color:var(--amber);font-weight:800}
+  footer{border-top:1px solid var(--line);padding:28px 0 40px;text-align:center;color:var(--muted);font-size:14px}
+  footer .big{color:var(--text);font-size:17px;font-weight:700;margin-bottom:6px}
+  .divider{height:1px;background:var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="logo">Bhai<span>.</span><small>Brotherhood</small></div>
+    <a class="top-cta" href="#join">Join free</a>
+  </header>
+
+  <!-- 1. HERO -->
+  <section id="hero">
+    <h1>Lost with <em>work</em>, <em>dating</em>, and <em>purpose</em>?</h1>
+    <p class="sub">You're not the only one. Bhai is brotherhood for guys in their 20s — small circles, real mentors, one step at a time.</p>
+    <a class="btn" href="#struggle">Find your circle</a>
+    <p class="hint">No gurus. No courses. Just guys walking the same road.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 2. STRUGGLE PICKER -->
+  <section id="struggle">
+    <div class="eyebrow">Start here</div>
+    <h2>What's weighing on you most?</h2>
+    <p class="section-sub">Pick one. We'll point you to the circle where guys are working on the same thing.</p>
+    <div class="pill-row" id="struggle-pills">
+      <button class="pill" data-struggle="work">Work &amp; money</button>
+      <button class="pill" data-struggle="dating">Dating &amp; confidence</button>
+      <button class="pill" data-struggle="purpose">Purpose &amp; direction</button>
+    </div>
+    <div class="rec" id="rec">
+      <strong id="rec-title"></strong>
+      <p id="rec-why"></p>
+      <a class="btn" href="#circles" id="rec-btn">See the circle</a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 3. CIRCLES -->
+  <section id="circles">
+    <div class="eyebrow">The circles</div>
+    <h2>Small circles. Real talk.</h2>
+    <p class="section-sub">Every circle is 6–8 guys, one weekly call, and a daily check-in. No audience, no showing off — just the work.</p>
+    <div class="grid two">
+      <div class="card" id="circle-grind">
+        <div class="tag">Circle 01</div>
+        <h3>The Grind</h3>
+        <p>Career, jobs, exams — getting your money right, one application at a time.</p>
+        <ul><li>Weekly call: what you applied to, what came back</li><li>Daily check-in: one concrete step, every day</li><li>6–8 guys, all in the same grind</li></ul>
+        <p class="for"><b>For:</b> job seekers, exam aspirants, anyone starting from zero.</p>
+      </div>
+      <div class="card" id="circle-approach">
+        <div class="tag">Circle 02</div>
+        <h3>The Approach</h3>
+        <p>Dating, confidence, talking to women — without the cringe, without the fake lines.</p>
+        <ul><li>Weekly call: what you tried, what actually happened</li><li>Daily check-in: one small social step</li><li>6–8 guys, honest feedback only</li></ul>
+        <p class="for"><b>For:</b> guys who freeze up, overthink, or have never really tried.</p>
+      </div>
+      <div class="card" id="circle-compass">
+        <div class="tag">Circle 03</div>
+        <h3>The Compass</h3>
+        <p>Purpose, discipline, habits — figuring out what your life is actually for.</p>
+        <ul><li>Weekly call: one goal, reviewed honestly</li><li>Daily check-in: did you keep your word to yourself?</li><li>6–8 guys, keeping each other straight</li></ul>
+        <p class="for"><b>For:</b> guys who feel directionless even when things look fine.</p>
+      </div>
+      <div class="card" id="circle-forge">
+        <div class="tag">Circle 04</div>
+        <h3>The Forge</h3>
+        <p>Fitness, health, energy — the body first, because everything else follows.</p>
+        <ul><li>Weekly call: training, sleep, food — no excuses</li><li>Daily check-in: move, eat, sleep — log it</li><li>6–8 guys, pushing each other</li></ul>
+        <p class="for"><b>For:</b> guys who know they need to get in shape and keep putting it off.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 4. MENTORS -->
+  <section id="mentors">
+    <div class="eyebrow">Mentors</div>
+    <h2>A mentor 5 years ahead of you, not a guru.</h2>
+    <p class="section-sub">Not a celebrity, not a course seller. Someone who was exactly where you are, a few years ago, and figured out the next step.</p>
+    <div class="grid three">
+      <div class="card">
+        <span class="example">Example</span>
+        <h3 style="margin-top:10px">The Exam-Cracker</h3>
+        <p>Cleared his exam after 3 attempts. Now guides aspirants through the same grind — what to study, what to skip, how to keep going after a failed attempt.</p>
+      </div>
+      <div class="card">
+        <span class="example">Example</span>
+        <h3 style="margin-top:10px">The First-Job Guy</h3>
+        <p>Landed his first job with no connections and a plain resume. Helps with resumes, interviews, and the first 90 days on the job.</p>
+      </div>
+      <div class="card">
+        <span class="example">Example</span>
+        <h3 style="margin-top:10px">The Comeback</h3>
+        <p>Rebuilt his life after losing direction completely. Talks straight about starting over — no sugar-coating, no shame.</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px">
+      <a class="btn" href="#join" data-mentor="get">Get a mentor</a>
+      <a class="btn ghost" href="#join" data-mentor="become">Become a mentor</a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 5. DAILY MISSIONS -->
+  <section id="missions">
+    <div class="eyebrow">Today</div>
+    <h2>Three missions. One day.</h2>
+    <p class="section-sub">Small enough to actually do. Tap one when it's done, then check in for the day.</p>
+    <div class="grid" style="gap:12px">
+      <div class="mission" data-mission="work">
+        <div class="n">1</div>
+        <div><b>Work — Apply to one job</b><span>One real application. Not browsing, not saving — sent.</span></div>
+      </div>
+      <div class="mission" data-mission="dating">
+        <div class="n">2</div>
+        <div><b>Dating — Start one conversation</b><span>With anyone, anywhere. A hello counts. A real one.</span></div>
+      </div>
+      <div class="mission" data-mission="purpose">
+        <div class="n">3</div>
+        <div><b>Purpose — Write down one thing you want this year</b><span>One line, on paper or on your phone. Make it specific.</span></div>
+      </div>
+    </div>
+    <div class="streak-box">
+      <div class="count"><b id="streak-count">0</b> day streak</div>
+      <button class="btn" id="checkin-btn">Check in today</button>
+    </div>
+    <p class="hint" id="checkin-note">Checking in keeps your streak alive. Miss a day, the streak restarts — that's the deal.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 6. JOIN -->
+  <section id="join">
+    <div class="eyebrow">Join</div>
+    <h2>Find your circle.</h2>
+    <p class="section-sub">Tell us a little. We'll match you with the circle that fits — and a mentor when one is free.</p>
+    <form id="join-form">
+      <label for="name">Your name</label>
+      <input type="text" id="name" placeholder="What should the circle call you?" required>
+      <label for="age">Your age</label>
+      <input type="number" id="age" min="16" max="40" placeholder="e.g. 23" required>
+      <label>What's weighing on you most?</label>
+      <div class="radio-row">
+        <label class="opt"><input type="radio" name="struggle" value="work" required> Work &amp; money</label>
+        <label class="opt"><input type="radio" name="struggle" value="dating"> Dating &amp; confidence</label>
+        <label class="opt"><input type="radio" name="struggle" value="purpose"> Purpose &amp; direction</label>
+      </div>
+      <button class="btn" type="submit">Find my circle</button>
+    </form>
+    <div class="welcome" id="welcome">
+      <h3>Welcome in, <span id="welcome-name"></span>.</h3>
+      <p>Your circle is <span class="circle-name" id="welcome-circle"></span>. Your first mission is waiting above — start today, and check in tonight.</p>
+      <p style="margin-top:14px"><a class="btn" href="#missions">See today's missions</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="big">Built for the ones figuring it out.</div>
+    Circles are forming now. Bhai is just getting started — and so are you.
+  </footer>
+</div>
+
+<script>
+(function(){
+  var CIRCLES = {
+    work:    {name:"The Grind",   why:"You picked work and money — The Grind is where guys are applying, preparing, and getting their money right together."},
+    dating:  {name:"The Approach",why:"You picked dating and confidence — The Approach is where guys practice talking to women honestly, without the cringe."},
+    purpose: {name:"The Compass", why:"You picked purpose and direction — The Compass is where guys figure out what their life is actually for, one habit at a time."}
+  };
+  var CIRCLE_ID = {work:"circle-grind", dating:"circle-approach", purpose:"circle-compass"};
+
+  /* 2. Struggle picker */
+  var pills = document.querySelectorAll('#struggle-pills .pill');
+  var rec = document.getElementById('rec');
+  pills.forEach(function(p){
+    p.addEventListener('click', function(){
+      pills.forEach(function(x){ x.classList.remove('active'); });
+      p.classList.add('active');
+      var c = CIRCLES[p.dataset.struggle];
+      document.getElementById('rec-title').textContent = 'Your circle: ' + c.name;
+      document.getElementById('rec-why').textContent = c.why;
+      document.getElementById('rec-btn').setAttribute('href', '#' + CIRCLE_ID[p.dataset.struggle]);
+      rec.classList.add('show');
+    });
+  });
+
+  /* 5. Missions + streak */
+  var today = new Date().toISOString().slice(0,10);
+  var yday = new Date(Date.now() - 86400000).toISOString().slice(0,10);
+  function loadStreak(){
+    var s = parseInt(localStorage.getItem('bhai_streak') || '0', 10);
+    document.getElementById('streak-count').textContent = s;
+    var last = localStorage.getItem('bhai_last_checkin');
+    var btn = document.getElementById('checkin-btn');
+    if (last === today){
+      btn.textContent = 'Checked in today';
+      btn.disabled = true;
+      document.getElementById('checkin-note').textContent = "Done for today. Come back tomorrow and keep the streak going.";
+    }
+    var done = JSON.parse(localStorage.getItem('bhai_missions_' + today) || '[]');
+    document.querySelectorAll('.mission').forEach(function(m){
+      if (done.indexOf(m.dataset.mission) !== -1) m.classList.add('done');
+    });
+  }
+  document.querySelectorAll('.mission').forEach(function(m){
+    m.addEventListener('click', function(){
+      var done = JSON.parse(localStorage.getItem('bhai_missions_' + today) || '[]');
+      var i = done.indexOf(m.dataset.mission);
+      if (i === -1){ done.push(m.dataset.mission); m.classList.add('done'); }
+      else { done.splice(i,1); m.classList.remove('done'); }
+      localStorage.setItem('bhai_missions_' + today, JSON.stringify(done));
+    });
+  });
+  document.getElementById('checkin-btn').addEventListener('click', function(){
+    var last = localStorage.getItem('bhai_last_checkin');
+    var s = parseInt(localStorage.getItem('bhai_streak') || '0', 10);
+    if (last === today) return;
+    s = (last === yday) ? s + 1 : 1;
+    localStorage.setItem('bhai_streak', String(s));
+    localStorage.setItem('bhai_last_checkin', today);
+    loadStreak();
+  });
+  loadStreak();
+
+  /* 6. Join form */
+  function showWelcome(name, struggle){
+    document.getElementById('join-form').style.display = 'none';
+    document.getElementById('welcome-name').textContent = name;
+    document.getElementById('welcome-circle').textContent = CIRCLES[struggle].name;
+    document.getElementById('welcome').classList.add('show');
+  }
+  var saved = null;
+  try { saved = JSON.parse(localStorage.getItem('bhai_join') || 'null'); } catch(e){}
+  if (saved && saved.name && CIRCLES[saved.struggle]) showWelcome(saved.name, saved.struggle);
+
+  document.getElementById('join-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('name').value.trim();
+    var struggle = (document.querySelector('input[name="struggle"]:checked') || {}).value;
+    if (!name || !struggle) return;
+    localStorage.setItem('bhai_join', JSON.stringify({name:name, struggle:struggle, age:document.getElementById('age').value}));
+    showWelcome(name, struggle);
+    document.getElementById('welcome').scrollIntoView({behavior:'smooth', block:'center'});
+  });
+
+  /* Mentor buttons: pre-select matching struggle hint */
+  document.querySelectorAll('[data-mentor]').forEach(function(b){
+    b.addEventListener('click', function(){
+      if (b.dataset.mentor === 'become'){
+        document.getElementById('join-form').querySelector('.btn').textContent = 'Become a mentor';
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
